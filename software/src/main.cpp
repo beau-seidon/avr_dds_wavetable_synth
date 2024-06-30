@@ -1,8 +1,3 @@
-// DDS output thru PWM on timer3 OC3A (pin C.6)
-// ATMega32u4 version
-// additive synthesis
-
-
 #include <Arduino.h>
 #include "parameters.h"
 #include "avr_config.h"
