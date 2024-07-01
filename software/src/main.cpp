@@ -1,8 +1,8 @@
 #include <Arduino.h>
 #include "parameters.h"
 #include "avr_config.h"
-#include "midi_handler.h"
 #include "voice_config.h"
+#include "midi_handler.h"
 
 
 

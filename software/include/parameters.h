@@ -1,7 +1,8 @@
 #pragma once
 
 #include <Arduino.h>
-#include "config.h"
+#include "main_config.h"
+
 
 
 /*  the DDS variables  */

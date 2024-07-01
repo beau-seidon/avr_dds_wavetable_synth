@@ -1,6 +1,7 @@
 #include "parameters.h"
 
 
+
 /*  the DDS variables  */
 volatile unsigned int phase_accumulator[MAX_VOICES];
 volatile unsigned int phase_increment[MAX_VOICES];

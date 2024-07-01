@@ -1,9 +1,10 @@
 #include "midi_handler.h"
 
 
-const byte POLYPHONY_MAX = MAX_VOICES;  // Set buffer and gate "polyphony" limit
-volatile byte note_buffer[POLYPHONY_MAX] = { 255, 255, 255, 255, 255, 255 };
+
+volatile byte note_buffer[MAX_VOICES] = { 255, 255, 255, 255, 255, 255 };
 volatile byte active_notes = 0;  // Gate will be open while any keys are pressed (any notes active)
+
 
 
 USBMIDI_CREATE_DEFAULT_INSTANCE();
@@ -29,7 +30,7 @@ void midi_read()
 
 void handleNoteOn(byte channel, byte note, byte vel)
 {
-    if (active_notes < POLYPHONY_MAX) {  // If note is already in the buffer, do nothing
+    if (active_notes < MAX_VOICES) {  // If note is already in the buffer, do nothing
         for (byte n = 0; n < active_notes; n++) {
             if (note_buffer[n] == note) {
                 return;
@@ -44,7 +45,7 @@ void handleNoteOn(byte channel, byte note, byte vel)
         // // debug:
         // Serial.print("note on: "); Serial.print(note); Serial.print("; active notes = "); Serial.println(active_notes);
         // Serial.print("buffer: [");
-        // for (int i = 0; i < POLYPHONY_MAX; i++) {
+        // for (int i = 0; i < MAX_VOICES; i++) {
         //     Serial.print(note_buffer[i]); Serial.print(",");
         // }
         // Serial.println("]");
@@ -83,7 +84,7 @@ void handleNoteOff(byte channel, byte note, byte vel)
         // // debug:
         // Serial.print("note off: "); Serial.print(note); Serial.print("; active notes = "); Serial.println(active_notes);
         // Serial.print("buffer: [");
-        // for (int i = 0; i < POLYPHONY_MAX; i++) {
+        // for (int i = 0; i < MAX_VOICES; i++) {
         //     Serial.print(note_buffer[i]); Serial.print(",");
         // }
         // Serial.println("]");

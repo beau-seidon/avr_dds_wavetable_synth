@@ -5,7 +5,8 @@
 void pitch_table_setup()
 {
     for (int i = 0; i < 127; i++) {
-        pitch[i] = K * (440.0 * pow(2.0, (((double)i - 69.0) / 12.0)));
+        // pitch[i] = K * (440.0 * pow(2.0, (((double)i - 69.0) / 12.0)));  // A4 = 440 Hz standard tuning and intonation
+        pitch[i] = K * (Cs133_Hz * pow(2.0, (((double)i - 61.0) / COSMIC_INTERVAL)));  // C#4 = 25 8va below Cs133 hyperfine transition frequency, wacky intonation
     }
 }
 
@@ -15,8 +16,8 @@ void wavetable_setup()
 {
     for (int i = 0; i < 256; i++) {
         // wavetable[i] = 127.0 * sin((2.0 * PI) * (double)i / 256.0);  // sine
-        // wavetable[i] = 127.0 * sin(pow(((2.0 * PI) * (double)i / 256.0), 2.0));  // sine^2??
         wavetable[i] = 127.0 * (double)i / 256.0;  // sawtooth
+        // wavetable[i] = (i > 128) ? (255.0 - (127.0 * 2.0 * (double)i) / 256.0) : (127.0 * 2.0 * (double)i / 256.0);  // triangle
     }
 }
 
@@ -27,7 +28,7 @@ void voice_setup()
     // const double C4 = 261.63;
     // const double E4 = 329.63;
     // const double G4 = 392.00;
-    const double TEST_TONE = 1000.0 * K;
+    const double TEST_TONE = 0.0;  // 1000.0 * K;
 
     // const unsigned long ACCUMULATOR_LENGTH = 65536 / (2 * PI);
     // const double PHASE_DURATION = (double)(ACCUMULATOR_LENGTH / 256.0) / SAMPLE_RATE;
